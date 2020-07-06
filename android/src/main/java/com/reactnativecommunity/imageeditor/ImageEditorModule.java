@@ -65,7 +65,7 @@ public class ImageEditorModule extends ReactContextBaseJavaModule {
   private static final String TEMP_FILE_PREFIX = "ReactNative_cropped_image_";
 
   /** Compress quality of the output file. */
-  private static final int COMPRESS_QUALITY = 90;
+  private static final int COMPRESS_QUALITY = 100;
 
   @SuppressLint("InlinedApi") private static final String[] EXIF_ATTRIBUTES = new String[] {
     ExifInterface.TAG_APERTURE,
@@ -267,6 +267,8 @@ public class ImageEditorModule extends ReactContextBaseJavaModule {
         if (hasTargetSize) {
           cropped = cropAndResize(mTargetWidth, mTargetHeight, outOptions);
         } else {
+          outOptions.inScaled = false;
+          outOptions.inSampleSize = 1;
           cropped = crop(outOptions);
         }
 
